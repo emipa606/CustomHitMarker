@@ -9,7 +9,6 @@ public static class CustomHitMarker
 {
     static CustomHitMarker()
     {
-        var harmonyInstance = new Harmony("com.rimworld.Dalrae.CustomHitMarker");
-        harmonyInstance.PatchAll(Assembly.GetExecutingAssembly());
+        new Harmony("com.rimworld.Dalrae.CustomHitMarker").PatchAll(Assembly.GetExecutingAssembly());
     }
 }
