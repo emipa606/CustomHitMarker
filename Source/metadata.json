@@ -2,5 +2,17 @@
   "Continued": true,
   "CanAdd": "0",
   "CanRemove": "0",
-  "PreviewVersion": "1.5"
+  "PreviewVersion": "1.6",
+  "Patches": false,
+  "Defs": true,
+  "Assemblies": true,
+  "LinesOfCode": 3926,
+  "LinesOfXML": 970,
+  "CodeBaseSize": 60,
+  "LastXmlCleaning": "2025-07-16T16:52:41.6353295+02:00",
+  "SocialImageSet": true,
+  "SearchTags": [
+    " combat",
+    " graphics"
+  ]
 }

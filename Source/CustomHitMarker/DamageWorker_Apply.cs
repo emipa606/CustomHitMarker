@@ -6,17 +6,15 @@ using Verse.Sound;
 
 namespace CustomHitMarker;
 
-[HarmonyPatch(typeof(Thing))]
-[HarmonyPatch("TakeDamage")]
-public static class CustomHitMakerB
+[HarmonyPatch(typeof(DamageWorker), nameof(DamageWorker.Apply))]
+public static class DamageWorker_Apply
 {
-    [HarmonyPostfix]
-    private static void Postfix(DamageInfo dinfo, Thing __instance)
+    public static void Postfix(DamageInfo dinfo, Thing victim)
     {
         if (dinfo.Def == DamageDefOf.Flame || dinfo.Def == DamageDefOf.Mining ||
             dinfo.Def == DamageDefOf.Deterioration || dinfo.Def == DamageDefOf.Rotting ||
-            !__instance.Position.ShouldSpawnMotesAt(__instance.Map) ||
-            __instance.Map.moteCounter.SaturatedLowPriority || __instance.def.category == ThingCategory.Mote)
+            !victim.Position.ShouldSpawnMotesAt(victim.Map) || victim.Map.moteCounter.SaturatedLowPriority ||
+            victim.def.category == ThingCategory.Mote)
         {
             return;
         }
@@ -26,11 +24,11 @@ public static class CustomHitMakerB
         var random = new Random();
         float num = random.Next(-5, 5);
         float num2 = random.Next(-5, 5);
-        var drawPos = __instance.DrawPos;
+        var drawPos = victim.DrawPos;
         drawPos.x += num * 0.1f;
         drawPos.z += num2 * 0.1f;
         moteThrown.exactPosition = drawPos;
-        GenSpawn.Spawn(moteThrown, __instance.Position, __instance.Map);
-        DRCHM_ThingDefOf.DRCHM_Hitmarker_Sound.PlayOneShot(new TargetInfo(__instance.Position, __instance.Map));
+        GenSpawn.Spawn(moteThrown, victim.Position, victim.Map);
+        DRCHM_ThingDefOf.DRCHM_Hitmarker_Sound.PlayOneShot(new TargetInfo(victim.Position, victim.Map));
     }
 }
