@@ -1,7 +1,7 @@
-using HarmonyLib;
-using RimWorld;
 using System;
 using System.Reflection;
+using HarmonyLib;
+using RimWorld;
 using Verse;
 using Verse.Sound;
 
@@ -16,10 +16,10 @@ public static class CustomHitMarker
     }
 
     /// <summary>
-    /// Spawns a hit marker mote and plays the hit marker sound once at the specified thing, with mote position randomization.
+    ///     Spawns a hit marker mote and plays the hit marker sound once at the specified thing, with mote position
+    ///     randomization.
     /// </summary>
-    /// <param name="position"></param>
-    /// <param name="map"></param>
+    /// <param name="thing"></param>
     internal static void TriggerHitMarking(Thing thing)
     {
         var theMap = thing.Map;
@@ -47,27 +47,22 @@ public static class CustomHitMarker
     }
 
     /// <summary>
-    /// Returns whether the given damage is eligible to spawn hit markers.
+    ///     Returns whether the given damage is eligible to spawn hit markers.
     /// </summary>
-    /// <param name="dinfo"></param>
+    /// <param name="damageInfo"></param>
     /// <returns></returns>
-    internal static bool DamageIsEligibleForHitMarking(DamageInfo dinfo)
+    internal static bool DamageIsEligibleForHitMarking(DamageInfo damageInfo)
     {
-        if (dinfo.Instigator == null)
+        if (damageInfo.Instigator == null)
         {
             // no instigator; basically, indirect or "natural" damage
             // then, need not spawn hit markers
             return false;
         }
 
-        if (dinfo.Def == DamageDefOf.Flame ||
-            dinfo.Def == DamageDefOf.ToxGas)
-        {
-            // "ticker" damage need not spawn hit markers
-            return false;
-        }
-
+        // "ticker" damage need not spawn hit markers
         // everything else is eligible
-        return true;
+        return damageInfo.Def != DamageDefOf.Flame &&
+               damageInfo.Def != DamageDefOf.ToxGas;
     }
 }

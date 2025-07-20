@@ -64,5 +64,5 @@ If the attack is hit, create a hitmarker!
 [/list] 
 
 [url=https://steamcommunity.com/sharedfiles/filedetails/changelog/2190406447][img]https://img.shields.io/github/v/release/emipa606/CustomHitMarker?label=latest%20version&amp;style=plastic&amp;color=9f1111&amp;labelColor=black[/img][/url] | tags:  combat,  graphics</description>
-  <modVersion IgnoreIfNoMatchingField="True">1.6.0</modVersion>
+  <modVersion IgnoreIfNoMatchingField="True">1.6.1</modVersion>
 </ModMetaData>
