@@ -21,6 +21,12 @@ public static class CustomHitMarker
     /// <param name="map"></param>
     internal static void TriggerHitMarking(Thing thing)
     {
+        if (thing.Map == null)
+        {
+            // skip handling if thing is not in any map
+            return;
+        }
+
         // randomize the mote position to be between -0.5 and +0.5, which is conveniently done by shifting random [0, 1) to [-0.5, 0.5)
         var random = new Random();
         var deltaX = (float)(random.NextDouble() - 0.5);
