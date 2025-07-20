@@ -11,6 +11,11 @@ public static class Thing_TakeDamage
 {
     public static void Postfix(DamageInfo dinfo, Thing __instance)
     {
+        if (__instance is not Pawn)
+        {
+            return;
+        }
+
         if (dinfo.Def == DamageDefOf.Flame || dinfo.Def == DamageDefOf.Mining ||
             dinfo.Def == DamageDefOf.Deterioration || dinfo.Def == DamageDefOf.Rotting ||
             !__instance.Position.ShouldSpawnMotesAt(__instance.Map) ||

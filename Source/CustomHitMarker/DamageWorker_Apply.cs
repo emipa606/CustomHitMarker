@@ -11,6 +11,11 @@ public static class DamageWorker_Apply
 {
     public static void Postfix(DamageInfo dinfo, Thing victim)
     {
+        if (victim is not Pawn)
+        {
+            return;
+        }
+
         if (dinfo.Def == DamageDefOf.Flame || dinfo.Def == DamageDefOf.Mining ||
             dinfo.Def == DamageDefOf.Deterioration || dinfo.Def == DamageDefOf.Rotting ||
             !victim.Position.ShouldSpawnMotesAt(victim.Map) || victim.Map.moteCounter.SaturatedLowPriority ||
