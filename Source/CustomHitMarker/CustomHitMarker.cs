@@ -1,4 +1,5 @@
 using HarmonyLib;
+using RimWorld;
 using System;
 using System.Reflection;
 using Verse;
@@ -43,5 +44,30 @@ public static class CustomHitMarker
         hitMarkerMote.exactPosition = markerDrawPos;
         GenSpawn.Spawn(hitMarkerMote, thing.Position, theMap);
         DRCHM_ThingDefOf.DRCHM_Hitmarker_Sound.PlayOneShot(new TargetInfo(thing.Position, theMap));
+    }
+
+    /// <summary>
+    /// Returns whether the given damage is eligible to spawn hit markers.
+    /// </summary>
+    /// <param name="dinfo"></param>
+    /// <returns></returns>
+    internal static bool DamageIsEligibleForHitMarking(DamageInfo dinfo)
+    {
+        if (dinfo.Instigator == null)
+        {
+            // no instigator; basically, indirect or "natural" damage
+            // then, need not spawn hit markers
+            return false;
+        }
+
+        if (dinfo.Def == DamageDefOf.Flame ||
+            dinfo.Def == DamageDefOf.ToxGas)
+        {
+            // "ticker" damage need not spawn hit markers
+            return false;
+        }
+
+        // everything else is eligible
+        return true;
     }
 }
