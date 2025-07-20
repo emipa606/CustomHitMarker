@@ -19,16 +19,6 @@ public static class Thing_TakeDamage
             return;
         }
 
-        var moteThrown = (MoteThrown)ThingMaker.MakeThing(DRCHM_ThingDefOf.DRCHM_Hitmarker);
-        moteThrown.Scale = 0.5f;
-        var random = new Random();
-        float num = random.Next(-5, 5);
-        float num2 = random.Next(-5, 5);
-        var drawPos = __instance.DrawPos;
-        drawPos.x += num * 0.1f;
-        drawPos.z += num2 * 0.1f;
-        moteThrown.exactPosition = drawPos;
-        GenSpawn.Spawn(moteThrown, __instance.Position, __instance.Map);
-        DRCHM_ThingDefOf.DRCHM_Hitmarker_Sound.PlayOneShot(new TargetInfo(__instance.Position, __instance.Map));
+        CustomHitMarker.TriggerHitMarking(__instance);
     }
 }

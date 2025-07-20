@@ -19,16 +19,6 @@ public static class DamageWorker_Apply
             return;
         }
 
-        var moteThrown = (MoteThrown)ThingMaker.MakeThing(DRCHM_ThingDefOf.DRCHM_Hitmarker);
-        moteThrown.Scale = 0.5f;
-        var random = new Random();
-        float num = random.Next(-5, 5);
-        float num2 = random.Next(-5, 5);
-        var drawPos = victim.DrawPos;
-        drawPos.x += num * 0.1f;
-        drawPos.z += num2 * 0.1f;
-        moteThrown.exactPosition = drawPos;
-        GenSpawn.Spawn(moteThrown, victim.Position, victim.Map);
-        DRCHM_ThingDefOf.DRCHM_Hitmarker_Sound.PlayOneShot(new TargetInfo(victim.Position, victim.Map));
+        CustomHitMarker.TriggerHitMarking(victim);
     }
 }
