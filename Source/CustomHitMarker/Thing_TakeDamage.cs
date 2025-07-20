@@ -19,9 +19,17 @@ public static class Thing_TakeDamage
         // then, the game calls DamageWorker.Apply(...), which may apply special damage effects to the pawn (e.g. to stun the pawn)
         // as such, no need to spawn hit markers at DamageWorker.Apply(...)
 
-        if (dinfo.Def == DamageDefOf.Flame || dinfo.Def == DamageDefOf.Mining ||
-            dinfo.Def == DamageDefOf.Deterioration || dinfo.Def == DamageDefOf.Rotting)
+        if (dinfo.Instigator == null)
         {
+            // no instigator; basically, indirect or "natural" damage
+            // then, need not spawn hit markers
+            return;
+        }
+
+        if (dinfo.Def == DamageDefOf.Flame || 
+            dinfo.Def == DamageDefOf.ToxGas)
+        {
+            // "ticker" damage need not spawn hit markers
             return;
         }
 
