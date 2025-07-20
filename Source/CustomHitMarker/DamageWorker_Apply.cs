@@ -17,9 +17,7 @@ public static class DamageWorker_Apply
         }
 
         if (dinfo.Def == DamageDefOf.Flame || dinfo.Def == DamageDefOf.Mining ||
-            dinfo.Def == DamageDefOf.Deterioration || dinfo.Def == DamageDefOf.Rotting ||
-            !victim.Position.ShouldSpawnMotesAt(victim.Map) || victim.Map.moteCounter.SaturatedLowPriority ||
-            victim.def.category == ThingCategory.Mote)
+            dinfo.Def == DamageDefOf.Deterioration || dinfo.Def == DamageDefOf.Rotting)
         {
             return;
         }

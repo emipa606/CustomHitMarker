@@ -17,9 +17,7 @@ public static class Thing_TakeDamage
         }
 
         if (dinfo.Def == DamageDefOf.Flame || dinfo.Def == DamageDefOf.Mining ||
-            dinfo.Def == DamageDefOf.Deterioration || dinfo.Def == DamageDefOf.Rotting ||
-            !__instance.Position.ShouldSpawnMotesAt(__instance.Map) ||
-            __instance.Map.moteCounter.SaturatedLowPriority || __instance.def.category == ThingCategory.Mote)
+            dinfo.Def == DamageDefOf.Deterioration || dinfo.Def == DamageDefOf.Rotting)
         {
             return;
         }

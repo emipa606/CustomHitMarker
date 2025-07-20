@@ -21,9 +21,11 @@ public static class CustomHitMarker
     /// <param name="map"></param>
     internal static void TriggerHitMarking(Thing thing)
     {
-        if (thing.Map == null)
+        var theMap = thing.Map;
+        if (theMap == null || !thing.Position.ShouldSpawnMotesAt(theMap) || thing.Map.moteCounter.SaturatedLowPriority)
         {
             // skip handling if thing is not in any map
+            // or, we should not be spawning motes according to game optimizations/limits
             return;
         }
 
@@ -39,7 +41,7 @@ public static class CustomHitMarker
         markerDrawPos.x += deltaX;
         markerDrawPos.z += deltaZ;
         hitMarkerMote.exactPosition = markerDrawPos;
-        GenSpawn.Spawn(hitMarkerMote, thing.Position, thing.Map);
-        DRCHM_ThingDefOf.DRCHM_Hitmarker_Sound.PlayOneShot(new TargetInfo(thing.Position, thing.Map));
+        GenSpawn.Spawn(hitMarkerMote, thing.Position, theMap);
+        DRCHM_ThingDefOf.DRCHM_Hitmarker_Sound.PlayOneShot(new TargetInfo(thing.Position, theMap));
     }
 }
